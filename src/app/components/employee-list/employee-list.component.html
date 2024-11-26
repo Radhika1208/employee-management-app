@@ -1,0 +1,33 @@
+<div class="employee-list-container">
+  <header class="employee-list-header">
+    <h2 class="employee-list-title">Employee List Details</h2>
+  </header>
+
+  <!-- Add Employee Button -->
+  <div class="add-employee-btn">
+    <button class="btn btn-add" routerLink="/add-employee">Add Employee Details</button>
+  </div>
+
+  <!-- Employee Table -->
+  <table class="employee-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Role</th>
+        <th>Date of Joining</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employees">
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.role }}</td>
+        <td>{{ employee.dateOfJoining | date }}</td>
+        <td>
+          <button class="btn btn-edit" (click)="onEdit(employee.id)">Edit</button>
+          <button class="btn btn-delete" (click)="onDelete(employee.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

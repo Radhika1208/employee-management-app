@@ -1,0 +1,129 @@
+/* Container for the employee list */
+.employee-list-container {
+  padding: 20px;
+  //background-color: #529cd5; /* Light blue background */
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  max-width: 1000px;
+}
+
+/* Header styling */
+.employee-list-header {
+  background-color: #529cd5; /* Light blue header */
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.employee-list-title {
+  font-size: 28px;
+  color: #ffffff; 
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Add Employee Button */
+.add-employee-btn {
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+.btn {
+  padding: 10px 15px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-add {
+  background-color: #529cd5;
+  color: white;
+}
+
+.btn-edit {
+  background-color: #ff9800; /* Orange color */
+  color: white;
+}
+
+.btn-delete {
+  background-color: #f44336; /* Red color */
+  color: white;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+
+/* Table styling */
+.employee-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.employee-table th, .employee-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.employee-table th {
+  background-color: #e0f7fa; /* Light blue */
+  color: #00796b; /* Dark teal */
+  font-weight: bold;
+}
+
+.employee-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Action buttons in table */
+.employee-table td button {
+  margin-right: 10px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .employee-list-container {
+    padding: 10px;
+    margin: 10px;
+  }
+
+  .employee-list-title {
+    font-size: 22px;
+  }
+
+  .employee-table th, .employee-table td {
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .btn {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+}
+
+/* Desktop responsiveness */
+@media (min-width: 769px) {
+  .employee-list-container {
+    max-width: 900px;
+  }
+
+  .employee-list-title {
+    font-size: 28px;
+  }
+
+  .employee-table th, .employee-table td {
+    font-size: 16px;
+  }
+
+  .btn {
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+}
