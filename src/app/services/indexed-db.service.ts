@@ -24,7 +24,7 @@ export class IndexedDBService {
 
   async addEmployee(employee: Employee) {
     const db = await this.dbPromise;
-    await db.put('employees', employee);
+    await db.add('employees', employee);
   }
 
   async getEmployees(): Promise<Employee[]> {

@@ -8,26 +8,71 @@
     <button class="btn btn-add" routerLink="/add-employee">Add Employee Details</button>
   </div>
 
-  <!-- Employee Table -->
-  <table class="employee-table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Role</th>
-        <th>Date of Joining</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let employee of employees">
-        <td>{{ employee.name }}</td>
-        <td>{{ employee.role }}</td>
-        <td>{{ employee.dateOfJoining | date }}</td>
-        <td>
-          <button class="btn btn-edit" (click)="onEdit(employee.id)">Edit</button>
-          <button class="btn btn-delete" (click)="onDelete(employee.id)">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <!-- Current Employees Section -->
+  <div class="employee-section">
+    <h3 class="employee-section-title">Current Employees</h3>
+    <table class="employee-table" *ngIf="employees.length > 0">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Role</th>
+          <th>Date of Joining</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of employees">
+          <td>{{ employee.name }}</td>
+          <td>{{ employee.role }}</td>
+          <td>{{ employee.dateOfJoining}}</td>
+          <td>
+            <button class="btn btn-edit" (click)="onEdit(employee.id)">Edit</button>
+            <button class="btn btn-delete" (click)="onDelete(employee.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Previous Employees Section -->
+  <div class="employee-section" *ngIf="previousEmployees.length > 0">
+    <h3 class="employee-section-title">Previous Employees</h3>
+    <table class="employee-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Role</th>
+          <th>Date of Joining</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of previousEmployees">
+          <td>{{ employee.name }}</td>
+          <td>{{ employee.role }}</td>
+          <td>{{ employee.dateOfJoining | date }}</td>
+          <td>
+            <button class="btn btn-edit" (click)="onEdit(employee.id)">Edit</button>
+            <button class="btn btn-delete" (click)="onDelete(employee.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Mobile View (Swipe to Delete) -->
+  <ng-container *ngIf="isMobileView">
+    <div class="employee-mobile-card" *ngFor="let employee of employees" 
+         (swipeleft)="onDelete(employee.id)" 
+         (click)="onEdit(employee.id)">
+      <div class="employee-info">
+        <p class="employee-name">{{ employee.name }}</p>
+        <p class="employee-role">{{ employee.role }}</p>
+        <p class="employee-date">{{ employee.dateOfJoining | date }}</p>
+      </div>
+      <div class="delete-button">
+        <i class="delete-icon" title="Delete"></i>
+      </div>
+    </div>
+  </ng-container>
 </div>

@@ -1,66 +1,83 @@
 <div class="employee-form">
-  <h2>{{ isEditMode ? 'Edit Employee' : 'Add Employee' }}</h2>
-  <form (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="name">Employee Name</label>
-      <input id="name" type="text" class="form-control" [(ngModel)]="employee.name" name="name" required />
+  <h2>Employee Form</h2>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" id="name" [(ngModel)]="employee.name" />
+  </div>
+  <div class="form-group">
+    <label for="role">Role</label>
+    <select id="role" [(ngModel)]="employee.role">
+      <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+    </select>
+  </div>
+  <div class="date-picker-container">
+    <label for="from-date">From Date</label>
+    <div class="date-picker-wrapper">
+      <input
+        type="text"
+        id="from-date"
+        placeholder="Select Date"
+        [value]="employee.dateOfJoining"
+        readonly
+      />
+      <button
+        class="calendar-icon"
+        (click)="toggleDatePicker('from')"
+        aria-label="Open From Date Picker"
+      >
+        📅
+      </button>
+      <span class="arrow-icon">➡️</span>
+      <label for="to-date">To Date</label>
+      <input
+        type="text"
+        id="to-date"
+        placeholder="Select Date"
+        [value]="employee.toDate"
+        readonly
+      />
+      <button
+        class="calendar-icon"
+        (click)="toggleDatePicker('to')"
+        aria-label="Open To Date Picker"
+      >
+        📅
+      </button>
     </div>
-
-    <div class="form-group">
-      <label for="role">Role</label>
-      <select id="role" class="form-control" [(ngModel)]="employee.role" name="role" required>
-        <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
-      </select>
+  </div>
+  <div
+    class="calendar"
+    *ngIf="showDatePicker"
+  >
+    <div class="calendar-header">
+      <button (click)="navigateMonth(-1)">&#8249;</button>
+      <span>{{ months[calendarMonth] }} {{ calendarYear }}</span>
+      <button (click)="navigateMonth(1)">&#8250;</button>
     </div>
-
-    <div class="form-group">
-      <label for="date">Date of Joining</label>
-      <div class="datepicker-container">
-        <input
-          type="text"
-          [value]="selectedDate ? formatDate(selectedDate) : ''"
-          class="form-control"
-          placeholder="Select Date"
-          readonly
-        />
-        <button type="button" class="calendar-icon" (click)="toggleDatePicker()">
-          <i class="fa fa-calendar"></i>
-        </button>
-        <div class="datepicker" *ngIf="showDatePicker">
-          <div class="calendar-header">
-            <button type="button" (click)="navigateMonth(-1)">&#9664;</button>
-            <span>{{ calendarMonth | date: 'MMMM' }} {{ calendarYear }}</span>
-            <button type="button" (click)="navigateMonth(1)">&#9654;</button>
-          </div>
-          <div class="predefined-buttons">
-            <button type="button" (click)="selectPredefined('today')">Today</button>
-            <button type="button" (click)="selectPredefined('nextMonday')">Next Monday</button>
-            <button type="button" (click)="selectPredefined('nextTuesday')">Next Tuesday</button>
-            <button type="button" (click)="selectPredefined('afterOneWeek')">After 1 Week</button>
-          </div>
-          <table>
-            <thead>
-              <tr>
-                <th *ngFor="let day of ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']">{{ day }}</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let week of calendarDates">
-                <td
-                  *ngFor="let date of week"
-                  [class.current]="date.toDateString() === currentDate.toDateString()"
-                  [class.selected]="selectedDate && date.toDateString() === selectedDate.toDateString()"
-                  (click)="selectDate(date)"
-                >
-                  {{ date.getDate() }}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+    <div class="predefined-buttons">
+      <button (click)="selectPredefined('today')">Today</button>
+      <button (click)="selectPredefined('nextMonday')">Next Monday</button>
+      <button (click)="selectPredefined('nextTuesday')">Next Tuesday</button>
+      <button (click)="selectPredefined('afterOneWeek')">After 1 Week</button>
+    </div>
+    <div class="calendar-grid">
+      <div
+        *ngFor="let week of calendarDates"
+        class="week"
+      >
+      <div
+      *ngFor="let date of week"
+      [class.selected]="date && isSelectedDate(date)" 
+      [class.today]="isToday(date)"
+      (click)="date && selectDate(date, selectedField)"
+    >
+      {{ date ? date.getDate() : '' }}
+    </div>
       </div>
     </div>
-
-    <button type="submit" class="btn btn-primary">{{ isEditMode ? 'Save Changes' : 'Add Employee' }}</button>
-  </form>
+  </div>
+  <div class="action-buttons">
+    <button class="cancel-btn" (click)="onCancel()">Cancel</button>
+    <button class="save-btn" (click)="onSubmit()">Save</button>
+  </div>
 </div>

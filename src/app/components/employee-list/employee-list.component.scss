@@ -1,17 +1,17 @@
-/* Container for the employee list */
+/* General Container */
 .employee-list-container {
   padding: 20px;
-  //background-color: #529cd5; /* Light blue background */
+  background-color: #f7f8fa;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   margin: 20px auto;
   max-width: 1000px;
 }
 
-/* Header styling */
+/* Header */
 .employee-list-header {
-  background-color: #529cd5; /* Light blue header */
-  padding: 15px;
+  background-color: #529cd5; /* Light blue */
+  padding: 20px;
   border-radius: 10px;
   margin-bottom: 20px;
   text-align: center;
@@ -19,7 +19,7 @@
 
 .employee-list-title {
   font-size: 28px;
-  color: #ffffff; 
+  color: #ffffff;
   font-weight: bold;
   margin: 0;
 }
@@ -27,11 +27,11 @@
 /* Add Employee Button */
 .add-employee-btn {
   text-align: left;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .btn {
-  padding: 10px 15px;
+  padding: 10px 20px;
   font-size: 14px;
   border: none;
   cursor: pointer;
@@ -45,17 +45,28 @@
 }
 
 .btn-edit {
-  background-color: #ff9800; /* Orange color */
+  background-color: #ff9800;
   color: white;
 }
 
 .btn-delete {
-  background-color: #f44336; /* Red color */
+  background-color: #f44336;
   color: white;
 }
 
 .btn:hover {
   opacity: 0.8;
+}
+
+/* Section for Current/Previous Employees */
+.employee-section {
+  margin-bottom: 30px;
+}
+
+.employee-section-title {
+  font-size: 22px;
+  color: #333;
+  margin-bottom: 10px;
 }
 
 /* Table styling */
@@ -81,49 +92,106 @@
   background-color: #f1f1f1;
 }
 
-/* Action buttons in table */
-.employee-table td button {
-  margin-right: 10px;
+/* Mobile View - Cards for Employees */
+.employee-mobile-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
 }
 
-/* Mobile responsiveness */
+.employee-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.employee-name {
+  font-weight: bold;
+}
+
+.employee-role, .employee-date {
+  font-size: 14px;
+}
+
+.delete-button {
+  display: none;
+  cursor: pointer;
+}
+
+.delete-icon {
+  font-size: 20px;
+  color: #b42121;
+}
+
+/* Display Delete Button on Swipe */
+.employee-mobile-card.swiped-left .delete-button {
+  display: block;
+}
+
+/* Mobile Responsiveness */
 @media (max-width: 768px) {
   .employee-list-container {
     padding: 10px;
     margin: 10px;
+    max-width: 100%;
   }
 
   .employee-list-title {
     font-size: 22px;
   }
 
-  .employee-table th, .employee-table td {
-    font-size: 12px;
-    padding: 10px;
+  .employee-table {
+    display: none;
   }
 
-  .btn {
-    font-size: 12px;
-    padding: 8px 10px;
+  .employee-mobile-card {
+    flex-direction: row;
+  }
+
+  .employee-name {
+    font-size: 16px;
+  }
+
+  .employee-role, .employee-date {
+    font-size: 14px;
+  }
+
+  .delete-button {
+    margin-left: 10px;
+  }
+
+  .delete-button:hover .delete-icon {
+    opacity: 0.8;
   }
 }
 
-/* Desktop responsiveness */
+/* Desktop Responsiveness */
 @media (min-width: 769px) {
-  .employee-list-container {
-    max-width: 900px;
+  .employee-table {
+    display: table;
   }
 
-  .employee-list-title {
-    font-size: 28px;
+  .employee-list-container {
+    padding: 30px;
+    max-width: 1200px;
   }
 
   .employee-table th, .employee-table td {
     font-size: 16px;
   }
 
-  .btn {
-    font-size: 14px;
-    padding: 10px 15px;
+  .employee-section-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .employee-table .btn {
+    margin-right: 10px; /* Space between buttons */
   }
 }
